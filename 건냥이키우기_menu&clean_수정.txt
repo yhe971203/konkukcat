@@ -1,0 +1,108 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+static int cleangage = 50;
+static int foodgage = 50;
+static int sleepgage = 50;
+static int joygage = 50;
+
+
+void menu(void){
+        int menunum;
+        while(1){ // level이 10이 되거나 게이지가 0이되면 종료해야함
+                printf(" 배부름\t%d\n 활발함\t%d\n 즐거움\t%d\n 깔끔함\t%d\n",foodgage,cleangage,sleepgage,joygage);
+                printf("0: eat/ 1: sleep/ 2: play/ 3:clean/ 4:exit\n");
+                scanf("%d",&menunum);
+                switch(menunum){
+                        case 0:
+                        printf("eat\n");
+                        //select_food();
+                        break;
+
+                case 1:
+                        printf("sleep\n");
+                        //select_sleep();
+                        break;
+
+                case 2:
+                        printf("play\n");
+                        //select_minigame();
+                        break;
+
+                case 3: //clean
+                        select_clean();
+                        continue;
+
+                case 4:
+                        exit(0);
+                }
+        }
+}
+              
+void startgame(void){ //게임시작할때 나오는 화면
+        int start;
+        do{
+
+                printf("~!~!건냥이 키우기~!~!\n건냥이의 만족도가 하나라도 0이 되면 건냥이 키우기 실패!\nlevel 10이 되면 건냥
+이 키우기 성공!\n만족도를 유지시켜 건냥이를 무사히 키워주세요(=oωo=)");
+                printf("\n  |￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣|\n　|게임을 시작하려면 0을 누르세요|            　  \n　|＿＿＿>＿＿＿＿＿＿＿＿＿＿＿＿|\n　　　 ∧∧ ||\n　　 ( ○?○)||\n　　　/　つΦ\n");
+
+                printf("~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n");
+                scanf("%d",&start);
+
+        }while(start);
+
+        menu();
+}
+
+void select_clean(void){
+        if(cleangage>90) printf("건냥 is already clean\n\n"); //최대 게이지 100넘는 것 방지
+        else{ //clean이미지 출력 & 게이지 10증가
+                cleangage = cleangage + 10;
+                printf("clean: %d\n",cleangage);
+                showcat();
+                printf("\n\n");
+        }
+}
+
+void showcat(void){ //저장된 고양이 이미지 출력
+
+
+        FILE *fp;
+        int c;
+
+        fp = fopen("clean.txt","r");
+
+        while((c = fgetc(fp)) != EOF){
+        putchar(c);
+        }
+
+        fclose(fp);
+
+
+        sleep(1);
+        return 0;
+}
+
+
+void gameover_atexit(void){ //게임종료되면 현재 레벨 출력하며 종료
+        printf("gameover(atexit)\n"); //test
+        printf("now level\n");
+}
+
+void savecatimage(){ //고양이 이미지 저장
+        FILE *fp = fopen("clean.txt","wt");
+        fputs(" ∧,,∧ clean~\n(oω<)\n/　つ----:☆:。\nＵＵ　　　 ..。\n　　　　　 .☆:.\n　　　　　　　′ .:☆:。\n　　　　　　  　＊:☆＊\n",fp);
+        fclose(fp);
+}
+
+int main(void){
+        savecatimage();
+        atexit(gameover_atexit);
+        startgame();
+        exit(0);
+}
+
+                         
+                                                             
