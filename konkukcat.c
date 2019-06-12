@@ -25,7 +25,7 @@ void time_level(int signo)
 
 	printf("\n\n*************************************\n");
 	printf("**************level%d*****************\n", level);
-	printf("*************************************");
+	printf("*************************************\n");
 	alarm(INTERVAL_LEVEL);
 }
 
@@ -74,9 +74,9 @@ void* rand_minus(void* data)
 
 		pthread_mutex_unlock(&mutex_lock);
 
-		sleep(9 - level);
+		sleep(10 - level);
 	}  // while문 끝 
-	printf("*:.*:.*:.*:.*:.*:.*:.*:.*:.*:.*:.*:.*:.*:.\n\n              GAME OVER!\n        Now one gage is zero\n\n*:.*:.*:.*:.*:.*:.*:.*:.*:.*:.*:.*:.*:.*:.\n");
+
 	exit(0);
 }
 
@@ -130,7 +130,6 @@ void select_food()
 
 		printf("**** Select the food's number ****\n ex)1 \n\n1. 말린 황태    2. 연어    3. 삼계탕\n\n");
 		scanf("%d", &num);
-		printf("%d\n", num);
 
 		if (num == 1) {
 			foodgage = foodgage + 5;
