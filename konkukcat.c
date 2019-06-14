@@ -161,7 +161,7 @@ void select_food()
 void showcat_food(int n)
 	{
 
-	    FILE *fp
+	    FILE *fp;
 	    int c;
 
 	    if (n == 50)
@@ -418,7 +418,7 @@ void play_minigame2(void)
 	char buf[200];
 
 	srand(time(NULL)); //time(NULL):1초 단위로 시간 변경
-	a = rand() % 3 + 1; //0~3까지 렌덤하게 숫자 발생
+	a = rand() % 3 + 1; //1~3까지 렌덤하게 숫자 발생
 
 	do
 	{
