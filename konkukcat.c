@@ -170,7 +170,7 @@ void showcat_food(int n)
         else
             fp = fopen("food70.txt", "r");
 
-	    while((c = fgetc(fp)) != -1)
+	    while((c = fgetc(fp)) != EOF)
         {
             putchar(c);
         }
