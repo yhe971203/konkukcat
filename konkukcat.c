@@ -55,6 +55,8 @@ void* rand_minus(void* data)
 		srand((unsigned)time(NULL));
 		rand_num = rand() % 4 + 1;
 
+		pthread_mutex_lock(&mutex_lock);
+		
 		switch (rand_num)
 		{
 		case 1:
@@ -155,29 +157,28 @@ void select_food()
 
 }
 
-// 화면에 이미지 출력
+
 void showcat_food(int n)
-{
-	FILE* fp;
-	int c = 0;
+	{
 
-	switch (n) {
-	case 50:
-		fp = fopen("food50.txt", "r");
-		break;
-	case 70:
-		fp = fopen("food70.txt", "r");
-		break;
+	    FILE *fp
+	    int c;
+
+	    if (n == 50)
+            fp = fopen("food50.text", "r");
+
+        else
+            fp = fopen("food70.text", "r");
+
+	    while((c = fgetc(fp)) != -1)
+        {
+            putchar(c);
+        }
+
+        fclose(fp);
+
+        sleep(2);
 	}
-
-	while ((c = fgetc(fp)) != -1) {
-		putchar(c);
-	}
-
-	fclose(fp);
-
-	sleep(2);
-}
 
 
 void select_sleep(void) {
